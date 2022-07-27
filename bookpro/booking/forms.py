@@ -1,0 +1,36 @@
+from ast import Subscript
+from dataclasses import field, fields
+from importlib.metadata import files
+from pickle import FALSE
+from pyexpat import model
+from random import choices
+from django import forms
+from traitlets import default
+from booking.models import indexdb, primedb,  subscribdb , nonsubscribdb
+from booking.models import SUBSCRIB_CHOICE ,SLOT
+
+class Formindex(forms.ModelForm):
+    class Meta:
+        model=indexdb
+        fields=('First_name', 'Last_name', 'Email', 'Mobile_number' ,'Department')
+
+class Formprime(forms.ModelForm):
+    class Meta:
+        model=primedb
+        fields=('__all__')
+
+class Formsubscrib(forms.ModelForm):
+    class Meta:
+        model=subscribdb
+        choices=SLOT
+        fields=('Subscriptionfee','Contribution','Additionalpass','Slot_time','Payable')
+
+class Formnonsubscrib(forms.ModelForm):
+    class Meta:
+        model=nonsubscribdb
+        choices=SLOT
+        fields=('Subscriptionfee','Contribution','Additionalpass','Slot_time','Payable')    
+    
+
+    
+            
