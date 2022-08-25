@@ -27,7 +27,7 @@ def prime(request):
         form=Formprime(request.POST)
     if 'Subscription'==[1,'Sub']:
         redirect('/subscrib')
-    elif 'Subscription'==['nonSub']:
+    elif 'Subscription'==[2,'nonSub']:
         redirect('/nonsubscrib')
     else:
         form=Formprime        
