@@ -19,14 +19,15 @@ class Formprime(forms.ModelForm):
         model=primedb
         choices=SUBSCRIB_CHOICE
         fields=( 'Subscription',)
-
+    
 
 
 class Formsubscrib(forms.ModelForm):
     class Meta:
         model=subscribdb
         choices=SLOT
-        fields=('Subscriptionfee','Contribution','Additionalpass','Slot_time',)
+        fields=('Subscriptionfee','Contribution','Additionalpass','Slot_time','payable')
+        
 
 class Formnonsubscrib(forms.ModelForm):
     class Meta:

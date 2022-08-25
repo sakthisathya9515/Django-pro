@@ -2,14 +2,13 @@ from ast import Return
 from dataclasses import field
 from multiprocessing.sharedctypes import Value
 from unittest.util import _MAX_LENGTH
-from click import Choice
 from django.db import models
 from django.forms import ChoiceField
 from django.db.models import Sum
 
 SUBSCRIB_CHOICE=(
-    (1,'Subscription'),
-    (2,'nonSubscription'))
+    [1,'Sub'],
+    [2,'nonSub'])
 
 SLOT=(
     (1,'08:00 PM(40)'), (2,'08:30 PM(40)'),
@@ -28,23 +27,22 @@ class indexdb(models.Model):
 
 
 class primedb(models.Model):
-    Subscription=models.IntegerField(choices=SUBSCRIB_CHOICE)
+    Subscription=models.IntegerField(choices=SUBSCRIB_CHOICE,default='Sub')
 
 
 class subscribdb(models.Model):
     Subscriptionfee=models.IntegerField(default=2500)
-    Contribution=models.IntegerField(default=0,blank=True)
+    Contribution=models.IntegerField(default=0,blank=True,null=True)
     Additionalpass=models.IntegerField(default=0,choices=ADDITIONAL,blank=True)
     Slot_time=models.IntegerField(default=0,choices=SLOT,blank=True)
-    payable=models.prefetch_related_objects
+    payable=models.IntegerField(default=2500)
     
     class meta:
         db_table="subscrib"
 
-
-    def payable(self):
-        return self.Subscriptionfee+self.Contribution+self.Additionalpass*310
-    
+    def Sum(self):
+        Sum=self.Subscriptionfee + self.Contribution + self.Additionalpass*310
+        print (Sum)
     
 
 class nonsubscribdb(models.Model):

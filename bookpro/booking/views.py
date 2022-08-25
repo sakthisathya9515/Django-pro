@@ -1,4 +1,5 @@
 
+from dataclasses import field
 from http.client import responses
 from pyexpat import model
 from random import choices
@@ -7,8 +8,8 @@ from django.http import HttpResponseRedirect
 from .forms import Formindex, Formprime , Formsubscrib , Formnonsubscrib
 from booking.models import SUBSCRIB_CHOICE ,SLOT
 SUBSCRIB_CHOICE=(
-    (1,'Subscription'),
-    (2,'nonSubscription'))
+    [1,'Sub'],
+    [2,'nonSub'])
 
 def index(request):
     form=Formindex
@@ -24,8 +25,12 @@ def prime(request):
     form=Formprime
     if request.method== 'POST':
         form=Formprime(request.POST)
-        if form.is_valid():
-            form.save()
+    if 'Subscription'==[1,'Sub']:
+        redirect('/subscrib')
+    elif 'Subscription'==['nonSub']:
+        redirect('/nonsubscrib')
+    else:
+        form=Formprime        
     return render( request,'prime.html',{'form':form},)      
 
 def subscrib(request):
