@@ -22,5 +22,7 @@ urlpatterns = [
     path('prime', views.prime),
     path('subscrib',views.subscrib),
     path('nonsubscrib',views.nonsubscrib),
+    path('subscrbpay',views.subscribpay),
+    path('nonsubscribpay',views.nonsubscribpay),
     path('root',admin.site.urls),
 ]

@@ -4,8 +4,8 @@ from importlib.metadata import files
 from pickle import FALSE
 from pyexpat import model
 from random import choices
+from urllib import request
 from django import forms
-from traitlets import default
 from booking.models import indexdb, primedb,  subscribdb , nonsubscribdb
 from booking.models import SUBSCRIB_CHOICE ,SLOT
 
@@ -17,19 +17,23 @@ class Formindex(forms.ModelForm):
 class Formprime(forms.ModelForm):
     class Meta:
         model=primedb
-        fields=('__all__')
+        choices=SUBSCRIB_CHOICE
+        fields=( 'Subscription',)
+
+
 
 class Formsubscrib(forms.ModelForm):
     class Meta:
         model=subscribdb
         choices=SLOT
-        fields=('Subscriptionfee','Contribution','Additionalpass','Slot_time','Payable')
+        fields=('Subscriptionfee','Contribution','Additionalpass','Slot_time',)
 
 class Formnonsubscrib(forms.ModelForm):
     class Meta:
         model=nonsubscribdb
         choices=SLOT
-        fields=('Subscriptionfee','Contribution','Additionalpass','Slot_time','Payable')    
+        fields=('Subscriptionfee','Contribution','Additionalpass','Slot_time','Payable')  
+        payable=forms.CharField
     
 
     

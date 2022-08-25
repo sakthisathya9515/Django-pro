@@ -1,14 +1,14 @@
-from tkinter import FALSE
+from ast import Return
+from dataclasses import field
+from multiprocessing.sharedctypes import Value
 from unittest.util import _MAX_LENGTH
 from click import Choice
 from django.db import models
 from django.forms import ChoiceField
-from numpy import maximum, number
-from pandas import value_counts
-from traitlets import default
+from django.db.models import Sum
 
 SUBSCRIB_CHOICE=(
-    (1,'Subscribtion '),
+    (1,'Subscription'),
     (2,'nonSubscription'))
 
 SLOT=(
@@ -23,12 +23,12 @@ class indexdb(models.Model):
     First_name = models.CharField(max_length=255)
     Last_name = models.CharField(max_length=255)
     Email = models.EmailField(max_length=255)
-    Mobile_number =models.IntegerField(default=0,blank=0)
+    Mobile_number =models.IntegerField(default=0)
     Department =models.CharField(max_length=255)
 
 
 class primedb(models.Model):
-    Subscription=models.IntegerField(null=False,choices=SUBSCRIB_CHOICE,blank=True)
+    Subscription=models.IntegerField(choices=SUBSCRIB_CHOICE)
 
 
 class subscribdb(models.Model):
@@ -36,8 +36,16 @@ class subscribdb(models.Model):
     Contribution=models.IntegerField(default=0,blank=True)
     Additionalpass=models.IntegerField(default=0,choices=ADDITIONAL,blank=True)
     Slot_time=models.IntegerField(default=0,choices=SLOT,blank=True)
-    Payable=models.IntegerField(default=0)
+    payable=models.prefetch_related_objects
+    
+    class meta:
+        db_table="subscrib"
 
+
+    def payable(self):
+        return self.Subscriptionfee+self.Contribution+self.Additionalpass*310
+    
+    
 
 class nonsubscribdb(models.Model):
     Subscriptionfee=models.IntegerField(default=310)

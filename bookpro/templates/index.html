@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>
-        Welcome IIT
+        Welcome 
     </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,8 +57,9 @@
                   <div class="card shadow-2-strong card-registration" style="border-radius: 15px;color:black">
                     <div class="card-body p-4 p-md-5">
                       <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">WELCOME , </h3>
-                      <form action="" method="POST">
+                      <form action="/prime" method="POST" id=register>
                         {% csrf_token %}
+                        {%block content%}
                         <center
                           {{form.as_p}}
                           <tr>
@@ -67,4 +68,5 @@
                             </td>
                           </tr>  
                         </form>
+                        {%endblock content%}
                         </center>
