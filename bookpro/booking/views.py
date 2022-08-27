@@ -1,8 +1,3 @@
-
-from dataclasses import field
-from http.client import responses
-from pyexpat import model
-from random import choices
 from django.shortcuts import redirect, render
 from django.http import HttpResponseRedirect
 from .forms import Formindex, Formprime , Formsubscrib , Formnonsubscrib
