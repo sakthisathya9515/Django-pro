@@ -25,12 +25,6 @@ def prime(request):
     form=Formprime
     if request.method== 'POST':
         form=Formprime(request.POST)
-    if 'Subscription'==[1,'Sub']:
-        redirect('/subscrib')
-    elif 'Subscription'==[2,'nonSub']:
-        redirect('/nonsubscrib')
-    else:
-        form=Formprime        
     return render( request,'prime.html',{'form':form},)      
 
 def subscrib(request):
