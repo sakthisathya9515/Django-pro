@@ -1,10 +1,8 @@
+from pickle import GET
 from django.shortcuts import redirect, render
 from django.http import HttpResponseRedirect
 from .forms import Formindex, Formprime , Formsubscrib , Formnonsubscrib
 from booking.models import SUBSCRIB_CHOICE ,SLOT
-SUBSCRIB_CHOICE=(
-    [1,'Sub'],
-    [2,'nonSub'])
 
 def index(request):
     form=Formindex
@@ -14,12 +12,13 @@ def index(request):
             form.save()
             return redirect('/prime')
     return render(request,'index.html',{'form':form})  
- 
 
 def prime(request):
     form=Formprime
     if request.method== 'POST':
         form=Formprime(request.POST)
+    if request.choices==[1,'Sub']:
+        return redirect (subscrib)
     return render( request,'prime.html',{'form':form},)      
 
 def subscrib(request):
