@@ -9,7 +9,7 @@ from django.db.models import Sum
 SUBSCRIB_CHOICE=(
     [1,'Sub'],
     [2,'nonSub'])
-
+    
 SLOT=(
     (1,'08:00 PM(40)'), (2,'08:30 PM(40)'),
     (3,'09:00 PM(20)'), (4,'09:30 PM(20)'))    
